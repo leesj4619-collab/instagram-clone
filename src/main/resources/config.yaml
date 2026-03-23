@@ -1,0 +1,26 @@
+# 환경설정 파일에 특수 띄어쓰기가 들어가 있으면 환경설정이 안될 수 있다.
+# 메모장, 특수 띄어쓰기 / 상황을 해결하려 문서 페이지로 접속하여 예기치 못한 띄어쓰기 있을 수 있다.
+# yml의 경우 주석으로 설명 작성 X
+# 오직 키이름: 데이터값
+# yml properties파일에는 주석이나 설명을 작성하지 않는다.
+# macOs -> window 눈에 보이지 않는 띄어쓰기라고 보이는 칸 안에 특수 기호가 들어간 띄어쓰기
+#회사에서 작성해놓은 yml 과 같은 환경설정 파일은 이런게 있구나~
+
+db:
+  url: jdbc:mysql://localhost:3306/mydb
+  username: root
+  password: tjee1234
+  upload:
+    profile-path: C:/uploads/profile
+    board-path: C:/uploads/board
+
+mail:
+  username: leesj4619@gmail.com
+  password: mivy bwyo mldo dgsl
+    # password app password 16자리로 이루어짐 2차 비밀번호 인증 통해 발급
+
+  #JWT secret
+  # 256bit 이상 랜덤 문자열로 반드시 변경
+jwt:
+  config:
+    secret: springboard-jwt-secret-key-2026-change-this-please!!!
