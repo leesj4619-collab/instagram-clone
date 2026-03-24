@@ -1,6 +1,7 @@
 package com.project.instagramclone.common;
 
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -41,11 +42,15 @@ public class CookieUtil {
     /**
      * Todo : req.getCookies()로 쿠키 배열을 가져오고, null이면 즉시 null을 반환하세요.
      */
-    public String get(HttpServletResponse req, String name) {
-        Cookie[] cookies =req.getCookies();
-        if (cookies == null) return null;
+    public String get(HttpServletRequest req, String name) {
+        Cookie[] cookies = req.getCookies();
+        if(cookies == null) return  null;
 
-        return Arrays.stream()
+        return Arrays.stream(cookies)
+                .filter(c -> name.equals(c.getName()))
+                .map(Cookie::getValue)
+                .findFirst()
+                .orElse(null);
     }
 }
 
