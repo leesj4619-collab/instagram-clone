@@ -23,4 +23,4 @@ mail:
   # 256bit 이상 랜덤 문자열로 반드시 변경
 jwt:
   config:
-    secret: springboard-jwt-secret-key-2026-change-this-please!!!
+    secret: instagram-jwt-secret-key-2026-change-this-please!!!

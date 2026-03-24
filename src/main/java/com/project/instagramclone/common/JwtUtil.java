@@ -29,7 +29,7 @@ public class JwtUtil {
     // application.yaml 에서 비밀문자열
     // jwt:
     //  config:
-    //   secret: springboard-jwt-secret-key-2026-change-this-please!!!
+    //   secret: instagram-jwt-secret-key-2026-change-this-please!!!
     // 을 바로 직접적인 문자열로 사용하는 것이아니라 SecretKey 타입으로 변환해야 JWT 라이브러리 사용 가능
     // yaml 값이 노출될 수 있다.
     // spring 자체에서 한 번 더 암호화 처리
