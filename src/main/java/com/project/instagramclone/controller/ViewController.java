@@ -14,6 +14,8 @@ import java.util.List;
  * 케밥케이스(-)    : .css .js .xml 폴더명 클래스와 아이디, name 명칭 또한 사용
  *
  * 모든 단어를 대문자로 사용 -> 상수 처럼 변하는 데이터가 없을 때만 사용
+ *
+ * javaScript 내부는 변수 명칭에서 카멜케이스 or 케밥케이스 둘 중 하나로 변수이름을 작성한다.
  */
 
 @Controller

@@ -1,25 +1,30 @@
 package com.project.instagramclone.controller;
+/**
+ * todoList 만들기 -> 개별적으로 진행하며, 어느정도 타이핑을 원활하게 칠 수 있는가?
+ */
 
 import com.project.instagramclone.model.dto.User;
 import com.project.instagramclone.model.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-public class UserAipController {
-    private final UserService userService;
+@RestController
+@RequiredArgsConstructor
+public class UserApiController {
+    private  final UserService userService;
 
-    // TODO A : 인증번호 발송 API
-    @PostMapping("/api/send-code")                     // TODO A-1: HTTP 메서드 어노테이션, 경로
-    public ResponseEntity<?> 인증번호발송(@RequestBody Map<String, String> body) {  // TODO A-2: 어노테이션
-        String email = body.get("email");              // TODO A-3: key 이름
-        userService.인증번호발송(email);                // TODO A-4: 서비스 메서드 호출
-        return ResponseEntity.ok(Map.of("message", "인증번호가 발송되었습니다.")); // TODO A-5: key
+    @PostMapping("/api/send-code")
+    public ResponseEntity<?> 인증번호발송(@RequestBody Map<String, String> body) {
+        String email = body.get("email");
+        userService.인증번호발송(email);
+        return ResponseEntity.ok(Map.of("message", "인증번호가 발송되었습니다."));
     }
 
-    // TODO B : 인증번호 확인 API
     @PostMapping("/api/verify-code")
     public ResponseEntity<?> 인증번호확인(@RequestBody Map<String, String> body) {
         boolean 성공 = userService.인증번호검증(           // TODO B-1: 서비스 메서드명
