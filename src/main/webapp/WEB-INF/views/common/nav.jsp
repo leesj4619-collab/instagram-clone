@@ -1,15 +1,30 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- NAV -> common/nav.jsp를 만든 후, 코드를 옮기고, 옮긴 코드를 include 이용해서 index.jsp에 배치하기 --%>
 <nav class="nav">
     <div class="nav-inner">
         <a href="/" class="nav-logo">instagram</a>
 
         <div class="nav-icons">
-            <a href="/" class="nav-icon">🏠</a>
-            <a href="#" class="nav-icon">🔍</a>
-            <a href="#" class="nav-icon">➕</a>
-            <a href="#" class="nav-icon">🤍</a>
+            <button class="nav-icon">
+                <img src="/static/img/icon-home.png" alt="홈" class="nav-icon">
+            </button>
+
+            <button  class="nav-icon">
+                <img src="/static/img/icon-search.png" alt="검색" class="nav-icon">
+            </button>
+
+            <button  class="nav-icon">
+                <img src="/static/img/icon-home.png" alt="새 게시물" class="nav-icon">
+            </button>
+
+            <button  class="nav-icon">
+                <img src="/static/img/icon-home.png" alt="좋아요" class="nav-icon">
+            </button>
+
+            <button  class="nav-icon">
+                <img src="/static/img/icon-home.png" alt="더보기" class="nav-icon">
+            </button>
 
             <c:choose>
                 <c:when test="${not empty loginUser}">
