@@ -32,7 +32,6 @@ async function 로그인() {
     });
 
     const data = await res.json();
-
     if (res.ok) {
         window.location.href = "/";
     } else {

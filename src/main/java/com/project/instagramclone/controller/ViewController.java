@@ -1,9 +1,13 @@
 package com.project.instagramclone.controller;
 
+import com.project.instagramclone.model.dto.Location;
+import com.project.instagramclone.model.service.LocationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+
 import java.util.List;
 
 /**
@@ -21,11 +25,14 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
     public class ViewController {
+
+    private final LocationService locationService;
     /**
      * 보통 "/" 경로는 따로 만들지 않아도
      * @return index.jsp 나 index.html파일을 바라보도록 설정되어 있다.
      * 자동감지설정이 읽혀지지 않을 수 있기 때문에 index 세팅
      */
+
     @GetMapping("/")
         public String indexView(Model model) {
         return "index";
@@ -37,8 +44,10 @@ import java.util.List;
         }
 
         @GetMapping("/map")
-        public String kakaoMapView() {
-            return "kakao-map";
+        public String kakaoMapView(Model model) {
+            List<Location> 장소목록데이터 = locationService.장소목록가져오기();
+            model.addAttribute ("locations", 장소목록데이터);
+            return "kakao/kakao-map";
         }
 
         @GetMapping("/user/register")

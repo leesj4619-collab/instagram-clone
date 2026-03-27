@@ -1,4 +1,7 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java" isELIgnored="true" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" isELIgnored="false" %>
+<%-- 만약 백엔드로 데이터를 front-end로 전달하는 데이터 있다면
+ isELIgonred="false" 로 설정해야한다.--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>카카오맵 마커</title>
@@ -25,7 +28,29 @@
     <div id="map"></div>
     <div class="side-panel">
         <h2>장소 목록</h2>
-        <div id="place-list"></div>
+        <div id="place-list">
+            <%--
+
+            c:forEach   반복 순회 하겠다 표기법
+            items       반복할 데이터 목록 model.addAttribute ("locations", 장소목록데이터); 로 가져온 데이터들
+            var         반복할 때 마다 하나씩 꺼낸 값을 담는 변수명
+            varStatus   반복 상태 정보를 담는 변수
+                        varStatus="status"
+                                  status.index -> 현재 순서 0번 째부터 순번 부여받음
+                                  status.count -> 현재 순서 1번 째부터 순번 부여 총 개수 length 형태
+                                  status.first -> 첫 번째 항목이면 true
+                                  status.last  -> 마지막  항목이면 true
+            --%>
+            <c:forEach items="${locations}" var="loc" varStatus="status">
+                <div class="place-item" id="place-${loc.id}" onclick="마커이동(${status.index})">
+                    <div class="place-icon" style="background: ${loc.color}22; color: ${loc.color}">
+                        ${loc.icon}
+                    </div>
+                    <div class="place-name">${loc.name}</div>
+                    <div class="place-desc">${loc.description}</div>
+                </div>
+            </c:forEach>
+        </div>
     </div>
 </div>
 <script>
@@ -36,43 +61,50 @@
     // API 연결 스크립트의 경우 최하단 배치
     // 웹 브라우저에서 map 생성하고 initMap 호출 과 같은 여러 작업을 한 다음에 마커를 찍는 작업
     //=======================================================
-    const locations = [
-        {id: 1, name: "경복궁", desc: "조선 시대 대표 궁궐", lat: 37.5796, lng: 126.9770, icon: "🏯", color: "#FF6B6B"},
-        {id: 2, name: "남산서울타워", desc: "서울 야경 명소", lat: 37.5512, lng: 126.9882, icon: "🗼", color: "#4ECDC4"},
-        {id: 3, name: "홍대 거리", desc: "젊음과 문화의 거리", lat: 37.5563, lng: 126.9236, icon: "🎨", color: "#FFE66D"},
-        {id: 4, name: "강남역", desc: "서울 최대 번화가", lat: 37.4979, lng: 127.0276, icon: "🏙️", color: "#A8E6CF"},
-        {id: 5, name: "한강공원", desc: "시민 휴식 공간", lat: 37.5283, lng: 126.9341, icon: "🌊", color: "#74B9FF"}
+        const locations = [
+        <c:forEach items="${locations}" var="loc" varStatus="status">{
+            id:    ${loc.id},
+            name:  "${loc.name}",
+            desc:  "${loc.description}",
+            lat:   ${loc.lat},
+            lng:   ${loc.lng},
+            icon:  "${loc.icon}",
+            color: "${loc.color}"
+                <%-- 현재 loc --%>
+        }<c:if test="${!status.last}">, </c:if>
+    </c:forEach>
     ];
-
     //=======================================================
     // 사이드 패널 장소 목록 렌더링
     //=======================================================
+
     // placeList
-    const 장소들 = document.getElementById("place-list");
-    console.log("place-list 확인 : ", 장소들);
-    // location = loc index = idx button = btn String = str message = msg
-    // locations = 장소들이 들어있는 리스트 목록들
-    //  forEach 문은 목록들을 0번 째 부터 끝번째까지 순회
+    // 위에서 백엔드로 전달받은 데이터의 형태를 html에 직접적으로 작성했기 때문에 innerHTML에서 추가해줄 필요 없다.
+    <%--const 장소들 = document.getElementById("place-list");--%>
+    <%--console.log("place-list 확인 : ", 장소들);--%>
+    <%--// location = loc index = idx button = btn String = str message = msg--%>
+    <%--// locations = 장소들이 들어있는 리스트 목록들--%>
+    <%--//  forEach 문은 목록들을 0번 째 부터 끝번째까지 순회--%>
 
-    locations.forEach((loc, idx) => {
-        console.log("현재 log : ", loc); // locations 을 순회해서 loc 안에 1번 부터 5번까지 모두다 조회가 되는지 확인
-        const item = document.createElement("div");
-        item.className = "place-item";
-        item.id = "place-" + loc.id;
-        item.innerHTML = `
-        <div class="place-icon" style="background:${loc.color}22; color:${loc.color}">
-            ${loc.icon}
-        </div>
-        <div class="place-info">
-            <div class="place-name">${loc.name}</div>
-            <div class="place-desc">${loc.desc}</div>
-        </div>
+    <%--locations.forEach((loc, idx) => {--%>
+    <%--    console.log("현재 log : ", loc); // locations 을 순회해서 loc 안에 1번 부터 5번까지 모두다 조회가 되는지 확인--%>
+    <%--    const item = document.createElement("div");--%>
+    <%--    item.className = "place-item";--%>
+    <%--    item.id = "place-" + loc.id;--%>
+    <%--    item.innerHTML = `--%>
+    <%--    <div class="place-icon" style="background:${loc.color}22; color:${loc.color}">--%>
+    <%--        ${loc.icon}--%>
+    <%--    </div>--%>
+    <%--    <div class="place-info">--%>
+    <%--        <div class="place-name">${loc.name}</div>--%>
+    <%--        <div class="place-desc">${loc.desc}</div>--%>
+    <%--    </div>--%>
 
-        `;
-        item.addEventListener("click", () => 마커이동(idx));
-        장소들.appendChild(item);
-        console.log("appendChild 완료 : ", item);
-    });
+    <%--    `;--%>
+    <%--    item.addEventListener("click", () => 마커이동(idx));--%>
+    <%--    장소들.appendChild(item);--%>
+    <%--    console.log("appendChild 완료 : ", item);--%>
+    <%--});--%>
 
     // =====================================================
     // 카카오로 지도 띄우기
@@ -107,6 +139,10 @@
             });
 
             // 인포윈도우 내용 (말풍선 팝업)
+            // 카카오맵에서 내부적으로 HTML을 이용해서 받는 형태로 코드자체가 되어 있기 때문에
+            // html 작성 불가
+            // isELIgnored="false"로 하였고, 백엔드 데이터를 자바스크립트에서 어떻게 가져오겠다 세팅이 되어 있지 않기 때문에
+            // css 적용이 되지 않는 것!
             const 인포윈도우내용 = `
             <div style="    background: #1a1a1a;    border: 1px solid #333;    border-radius: 12px;    padding: 12px 14px;     font-family: 'Inter', sans-serif; min-width: 160px; box-shadow: 0 8px 32px rgba(0,0,0,0.5);">
                 <div style="font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px;">${loc.icon} ${loc.name}</div>
@@ -151,6 +187,11 @@
         document.getElementById("place-"+locations[idx].id).classList.add("active");
 
     }
+    /*
+    혹시 우리 화살표 함수 배웠었나요? =>
+    안 배웠다면 이 부분과  왜
+    ` 쓰는지 그리고 왜 여러 종류 중 innerHTML인 건지도 설명 부탁드려요.
+     */
 
 </script>
 <%--
@@ -160,7 +201,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=af04607b3d836658e4f7861b8d2373f8&onload=지도초기화"></script>
 --%>
 <%-- 비즈 앱 이 아닌 테스트 앱 -> 비즈 앱에 기재되어 있는 플랫폼 키에서 JavaScript 키 를 가져와 사용한다.--%>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=af04607b3d836658e4f7861b8d2373f8&autoload=false"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a6e997139cd45275e0d2c84a9e7c63fc&autoload=false"></script>
 <script>
     kakao.maps.load(function (){
         지도초기화();

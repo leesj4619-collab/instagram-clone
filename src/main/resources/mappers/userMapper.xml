@@ -5,7 +5,7 @@
 
 <mapper namespace="com.project.instagramclone.model.mapper.UserMapper">
     <insert id="회원가입" parameterType="com.project.instagramclone.model.dto.User">
-        INSERT INTO users (name, email, password, createdAt)
+        INSERT INTO users (name, email, password, created_at)
         VALUES (#{name}, #{email}, #{password}, now())
     </insert>
     <select id="이메일중복체크" parameterType="com.project.instagramclone.model.dto.User" resultType="int">
