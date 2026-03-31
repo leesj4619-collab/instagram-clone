@@ -3,6 +3,8 @@ package com.project.instagramclone.model.mapper;
 import com.project.instagramclone.model.dto.User;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface UserMapper {
 
@@ -13,5 +15,7 @@ public interface UserMapper {
     // TODO D-2 : 이메일 중복 체크 메서드 선언
     // SQL 에서 COUNT(*) 결과를 받아야 한다. 어떤 자료형?
     int 이메일중복체크(String email);
+
+    List<User> 모든회원조회();
 }
 

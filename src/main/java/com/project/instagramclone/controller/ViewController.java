@@ -75,4 +75,8 @@ import java.util.List;
             return "board/edit";
         }
 
+        @GetMapping("/users/list")
+        public String allUserView() {
+            return "user/user-list";
+        }
 }
