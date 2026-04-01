@@ -32,10 +32,12 @@
             </div>
         </div>
 
-        <div class="nav-icons"></div>
+        <div class="nav-icons">
             <a class="nav-icon" href="/">홈</a>
             <a class="nav-icon" href="map">지도</a>
-            <a class="nav-icon" href="/">글쓰기</a>
+            <a class="nav-icon">글쓰기</a>
+        </div>
+
 
             <c:choose>
                 <c:when test="${not empty loginUser}">
