@@ -24,3 +24,9 @@ mail:
 jwt:
   config:
     secret: instagram-jwt-secret-key-2026-change-this-please!!!
+
+kakao:
+  confing:
+    client-id: 1020d64add49f43874eee8550e2b12fb
+    redirect-uri: http://localhost:8080/api/kakao/callback
+    client-secret: vxfi6xQbsnarK5Eu1RKHlMguc8yrYxjQ

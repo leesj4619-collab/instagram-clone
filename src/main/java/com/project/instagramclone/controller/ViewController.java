@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import java.util.List;
@@ -33,12 +35,23 @@ import java.util.List;
      * 자동감지설정이 읽혀지지 않을 수 있기 때문에 index 세팅
      */
 
-    @GetMapping("/")
+    /*************************** 수정되었다. *****************************/
+        @GetMapping("/user/kakao-register")
+        public String kakaoRegisterView(@RequestParam String email,
+                                                @RequestParam(defaultValue = "") String name,
+                                                Model model) {
+            model.addAttribute("kakaoEmail", email);
+            model.addAttribute("kakaoName", name);
+            return "user/kakao-register";
+        }
+    /*************************** 수정 끝 *****************************/
+
+        @GetMapping("/")
         public String indexView(Model model) {
         return "index";
         }
 
-        @GetMapping("/user/login")
+        @GetMapping("/login")
         public String loginView(Model model) {
             return "user/login";
         }

@@ -8,13 +8,46 @@
         INSERT INTO users (name, email, password, created_at)
         VALUES (#{name}, #{email}, #{password}, now())
     </insert>
-    <select id="이메일중복체크" parameterType="com.project.instagramclone.model.dto.User" resultType="int">
+
+    <select id="이메일중복체크" parameterType="String" resultType="com.project.instagramclone.model.dto.User">
         SELECT count(*)
         FROM users
         WHERE email = #{email}
     </select>
+
+    <select id="이메일로회원찾기" parameterType="String"
+            resultType="com.project.instagramclone.model.dto.User">
+        SELECT *
+        FROM users
+        WHERE email = #{email}
+    </select>
+
     <select id="모든회원조회" parameterType="com.project.instagramclone.model.dto.User">
         SELECT *
         FROM users
+    </select>
+
+    <!--
+    @맨션 검색용 쿼리
+    유조 @hong으로 입력하면 name에서 hong이 포함된 유저 목록 반환
+    LIMIT 5 : 유저이름이 너무 많이 뜨면 UX(성능)이 나빠지므로 5명 반환
+
+    name LIKE CONCAT('%',#{keyword}) 앞에 뭐가오든 상관 없이 맨 뒤에 keyword가 있어야 한다.
+        ex : keyword =kim
+        result : kim, parkim, hello kim, ...
+    name LIKE CONCAT(#{keyword},'%') 무조건 keyword로 시작하고 뒤에 오는 건 상관 없다
+        ex : keyword =kim
+        result : kim, kim123, kimchi, ...
+    name LIKE CONCAT('%',#{keyword},'%')
+        ex : keyword =kim
+        result : kim, parkkim123, kimchi, parkim, ...
+        단어에 kim이 들어가면 된다!.
+    -->
+    <select id="유저명검색" resultType="com.project.instagramclone.model.dto.User">
+        SELECT id, name, email, users.profile_img
+        FROM users
+        WHERE name LIKE CONCAT('%',#{keyword},'%')
+        ORDER BY name
+        LIMIT 5
     </select>
 </mapper>

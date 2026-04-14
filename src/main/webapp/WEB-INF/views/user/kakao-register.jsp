@@ -62,27 +62,6 @@
                         <input class="field-input" type="email" id="email" placeholder="이메일">
                         <label class="field-label" for="email">이메일</label>
                     </div>
-                    <button class="field-side-btn" id="send-code-btn" type="button" onclick="인증번호발송()">
-                        인증번호 발송
-                    </button>
-                </div>
-
-                <div id="code-area" style="display:none; width:100%; margin-top:8px;">
-                    <div class="field-row">
-                        <div class="field">
-                            <input class="field-input" type="text" id="code" placeholder="인증번호 6자리" maxlength="6">
-                            <label class="field-label" for="code">인증번호</label>
-                        </div>
-                        <button class="field-side-btn" id="verify-btn" type="button" onclick="인증번호확인()">
-                            확인
-                        </button>
-                    </div>
-                    <div id="verify-result" class="verify-result"></div>
-                </div>
-
-                <div class="field" style="margin-top:8px;">
-                    <input class="field-input" type="password" id="password" placeholder="비밀번호">
-                    <label class="field-label" for="password">비밀번호</label>
                 </div>
 
                 <button class="btn btn-blue" id="register-btn" style="margin-top:12px;" onclick="가입하기()">

@@ -12,10 +12,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-    private Integer Id;
-    private String Name;
-    private String Email;
-    private String Password;
+    private Integer id;
+    private String name;
+    private String email;
+    private String password;
     private LocalDateTime createdAt;
     private String profileImg;
 

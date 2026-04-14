@@ -1,7 +1,7 @@
 let 이메일인증완료 = false;    // 회원가입 창 들어오자마자 인증완료 되는 건 이상하다! -> 인증한 적이 없기 때문에
 
 async function 인증번호발송() {
-    const email = document.getElementById("id=email").value.trim();
+    const email = document.getElementById("email").value.trim();
 
     if (!email) {
         alert("이메일을 입력하세요.");
